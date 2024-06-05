@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<title>Contact</title>
+<style type="text/css">
+    html, body{height: 100%; margin: 0; overflow: hidden;}
+    #content{height: 100%; box-sizing: border-box;}
+    .background{background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url(images/Party_Background.webp); background-size:cover; width: 100%;height: 110%;}
+    .layout{width: 100%; display: grid; grid-template-columns: auto auto;  }
+    .details,.form{margin: 30px auto 0px auto; text-align: left; height: fit-content;}
+    .details{vertical-align: top; text-align: left;}
+    .form{width: 400px; box-sizing: border-box; display: grid;  gap: 45px; max-width: 70%; margin: 30px auto 0px auto;}
+    .form input, .form textarea{text-align: left; width: 100%; height: 25px; margin: 5px 0px; font-size: 12px; box-sizing: border-box;}
+    .form input#button{width: 30%; text-align: center; margin: 20px 0px;}
+    .form textarea#message{height: 80px;}
+    .contact_info a {color: inherit;}
+    #contact_social_links a{display: inline-block; height: 5px; margin-top: 30px;}
+    #contact_social_links a img{height: 25px;}
+    @media screen and (max-width: 700px) {
+    .layout{ grid-template-columns: auto;}
+    .details{margin: 20px auto 0px auto; text-align: center;}
+    .form{margin: 10px auto 0px auto;}
+}
+    @media screen and (max-width: 450px) {
+    .details{margin: 70px auto 0px auto}   
+    .details{text-align: center;}
+    html, body{overflow: scroll;}
+    .form{margin-bottom: 150px;}
+}
+</style>
+
+</head>
+
+<body>
+    <div class="header">
+		<div><a href="index.html">Home</a></div>
+		<div><a href="meet_the_band.html">Meet the Band</a></div>
+		<div><a href="events.html">Events</a></div>
+		<div id="contact"><a href="contact.html">Contact</a></div>
+        </div>
+    <div id="content">
+        <div class="background">
+        <div class="layout">
+            <div class="details">
+
+        <h2> Contact Us</h2>
+        <div class="contact_info">
+        Email: <a href="mailto:email@example.com">email@example.com</a></br>
+        Call or Text: <a href="tel:1234567890">123-456-7890</a>
+        <div id="contact_social_links">    
+            <a href='https://www.instagram.com' target="_blank"><img src='images/instagram.webp'></a>
+            <a href='https://www.twitter.com' target="_blank"><img src='images/twitter.png'></a>
+            <a href='https://www.facebook.com' target="_blank"><img src='images/facebook.png'></a>
+        </div>
+        </div>
+        </div>
+        <div class="form">
+        <form action="#" method="get">
+            <label>First Name:</label><input type="text" name='firstname'></input>
+            <label>Last Name:</label><input type="text" name='lastname'></input>
+            <label>Email:</label><input type="text" name='email'></input>
+            <label>Phone:</label><input type="text" name='phone'></input>
+            <label>Message:</label><textarea id="message" type="text" name='message'></textarea>
+            <input id = "button" type = "submit" value = "Send">
+
+        </form>
+    </div>
+    </div>
+    </div>
+    <div class="footer">
+        <div><a href="tel:1234567890">123-456-7890</a></div>
+        <div id="social_links">    
+            <a href='https://www.instagram.com' target="_blank"><img src='images/instagram.webp'></a>
+            <a href='https://www.twitter.com' target="_blank"><img src='images/twitter.png'></a>
+            <a href='https://www.facebook.com' target="_blank"><img src='images/facebook.png'></a>
+        </div>
+        <div><a href="mailto:email@example.com">email@example.com</a></div>
+        </div>
+</body>

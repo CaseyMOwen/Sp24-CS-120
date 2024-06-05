@@ -1,0 +1,371 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<title>Wordle</title>
+<style type="text/css">
+    h1{font-size: 50px; margin-bottom: 30px;}
+    h2{margin-top: 0px;}
+    #correct_answer{height:fit-content}
+    #game, #used_letters{display: inline-block; width: 40%; margin: 0px 25px 50px 25px; vertical-align: top;}
+    #used_letters{margin-top: 0px; margin-left: 50px; width:fit-content}
+    #avg_score{margin: 20px 0px; text-align: left; font-size: 20px;}
+    #game{width: fit-content}
+    /* #game {width: 50%} */
+    #used_letters_box{vertical-align: top; border: 3px solid white; width: 330px; min-height: 200px; padding: 20px; border-radius: 10px;}
+    #used_letters_grid{display: grid; grid-template-columns: auto auto auto auto; width: max-content; gap: 10px; }
+    #content {min-height: 200px; width: 100%; font-family: 'Open Sans', sans-serif; color: white; text-align: center;}
+    html{background-color: rgb(30, 30, 30, 1);}
+    .letter_grid{display: grid; grid-template-columns: auto auto auto auto auto; width: max-content; gap: 10px;}
+    .letter_block{display: flex; margin: auto auto; box-sizing: border-box; height: 50px; font-size: 40px; width: 75px; justify-content: center; align-items: center; border-radius: 5px; font-weight: 600;}
+    #guess{display: inline-block; margin: 20px 0px 0px 0px; width: 407px; box-sizing: content-box; font-size: 35px; border-radius: 0; height: 50px; text-align: center;}
+    #inputs{width: 415px}
+    #enter,#newgame{width: 415px; height: 50px;}
+    #enter,#newgame{font-size: 30px; background-color: rgb(30, 30, 30, 1); border: 3px solid #e4e4e4; border-radius: 3px; color: #e4e4e4; box-sizing: border-box;}
+    #enter{margin-top: 20px;}
+    #newgame{margin-top: 20px;}
+    .green{background-color: green;}
+    .gold{background-color: rgb(202, 172, 2);}
+    .grey{background-color: grey;}
+    .white{border: 2px solid grey;}
+    /* so that other elements are not moved when shake */
+    .ui-effects-wrapper {display: inline-block;}
+    #error_msg{margin-left: 10px; margin-top: 20px; font-size: 20px;}
+
+    @media screen and (max-width: 950px) { 
+        #used_letters{margin: 20px 25px}
+        #game{margin-bottom: 0px;}
+        #avg_score{text-align: center;}
+    }
+
+    @media screen and (max-width: 480px) {
+        h1{font-size: 40px; margin-bottom: 0px;}
+        h2{font-size: 25px;}
+        #correct_answer{font-size: 25px; margin-top: 10px;}
+        .letter_block{width: 55px; height: 40px; font-size: 35px;}
+        #enter,#newgame,#guess,#inputs {width: 300px;}
+        #guess,#newgame{width: 292px}
+        #guess,#guess,#newgame{font-size: 30px;}
+        #inputs{margin: 0 auto}
+        #game {text-align: center;}
+        #used_letters_box{width: 250px}
+        #used_letters{margin-top: 0px;}
+    }
+
+</style>
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   
+integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   
+crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+</head>
+<script>
+
+    $(document).ready(function() {
+        wordl = new Wordle()
+        wordl.newGame()
+    })
+
+    function Row(word, colors) {
+        this.word = word
+        // colors is array of length 5 with values "grey", "green", "gold" or "white"
+        this.colors = colors
+        this.rowDivString = function() {
+            result = ''
+            char_array = this.word.toUpperCase().split('')
+            for (i=0; i<char_array.length; i++) {
+                    result += '<div class="letter_block ' + this.colors[i] + '">' + char_array[i] + '</div>'
+            }
+            return result
+        }
+    }
+
+    function Grid(rows, maxrows) {
+        this.rows = rows
+        this.maxrows = maxrows
+        this.filledrows = 0
+        this.display = function() {
+            $(".letter_grid").html(this.gridDivString())
+        }
+        this.gridDivString = function() {
+            result = ''
+            this.rows.forEach(function(row) {
+                result += row.rowDivString()
+            })
+            return result
+        }
+        // Returns true on success, false on failure
+        this.addRow = function(rowWord, colors) {
+            if (this.filledrows >= this.maxrows) {
+                return false
+            }
+            newRow = new Row(rowWord, colors)
+            this.rows.splice(this.filledrows, 1, newRow)
+            this.filledrows++
+            this.display()
+            return true
+        }
+    }
+    
+    function Wordle() {
+        this.word = null
+        this.guess = null
+        this.grid = null
+        this.used_letters = []
+        this.avg_score = null
+        this.games_played = 0
+        
+        this.newGame = function() {
+            rows = []
+            for (i=0; i<6; i++) {
+                row = new Row('     ', ['white', 'white', 'white', 'white', 'white'])
+                rows.push(row)
+            }
+            this.grid = new Grid(rows, 6)
+            this.grid.display()
+            this.word = this.getWord()
+            this.used_letters = []
+            this.displayUsedLetters()
+            $('#enter').show()
+            $("#guess").show();
+            $("#newgame").hide()
+            this.readCookies()
+            this.showAvgScore()
+            this.setAnimations()
+            this.bindButtons()
+            $("#guess").focus()
+            $('#correct_answer').html('')
+        }
+        
+        this.getGuessColors = function() {
+            guess_array = this.guess.toUpperCase().split('')
+            word_array = this.word.toUpperCase().split('')
+            colors = Array(5)
+            // Check greens first, they are higher priority than golds
+            removed_count = 0
+            for(i=0;i<guess_array.length;i++) {
+                if (this.word.toUpperCase()[i] == guess_array[i]) {
+                    colors[i] = 'green'
+                    // Remove them so they are not looked at again
+                    word_array.splice(i - removed_count, 1)
+                    removed_count++
+                }
+            }
+            // Then check golds on what is remaining
+            for (j=0; j<guess_array.length; j++) {
+                if (colors[j] == 'green') {
+                    continue
+                }
+                else if (word_array.includes(guess_array[j])) {
+                    colors[j] = 'gold'
+                    // Remove so not looked at again
+                    word_array.splice(word_array.indexOf(guess_array[j]), 1)
+                }
+                else {
+                    colors[j] = 'grey'
+                    // If guess has double letters, one may match while other doesn't. Need to check this.word, not just word_array
+                    if (!this.word.toUpperCase().split('').includes(guess_array[j])) {
+                        this.used_letters.push(guess_array[j])
+                    }
+                }
+            }
+            return colors
+        }
+
+        
+        this.isAllGreen = (colors) => {
+            for (i=0;i<colors.length; i++) {
+                if (colors[i] != 'green') {
+                    return false
+                }
+            }
+            return true
+        }
+        
+        this.getWord = async function() {
+            response = await fetch('dictionary.json')
+            data = await response.json()
+            randomIndex = Math.floor(Math.random() * data.length);
+            this.word = data[randomIndex];
+            console.log('The word is: "' + this.word + '"');
+        }
+        
+        this.checkIfWord = async function() {
+            url = 'https://dictionaryapi.com/api/v3/references/collegiate/json/' + this.guess + '?key=0063f479-83d3-4c3d-807f-ce198072d046'
+            try {
+                response = await fetch(url);
+                data = await response.json()
+                validWord = !((data.length == 0) || (typeof data[0] === 'string'))
+                return validWord
+            }
+            catch(error) {
+                console.error('Could not check if that was a word: ', error);
+                throw error
+                return null
+            }
+        }
+        
+        this.displayUsedLetters = function() {
+            // removes duplicates by converting it to a Set then back to an array with ...
+            this.used_letters = [...new Set(this.used_letters)];
+            result = ''
+            for (i=0; i<this.used_letters.length; i++) {
+                result += '<div class="letter_block grey">' + this.used_letters[i].toUpperCase() + '</div>'
+            }
+            $("#used_letters_grid").html(result)
+        }
+        
+        this.showError = function(message) {
+            $("#error_msg").html(message)
+            setTimeout(function() {
+                $('#error_msg').html('');
+            }, 3000);
+        }
+        
+        this.checkValidGuess = async function() {
+            if (this.guess.length < 5) {
+                this.showError("Invalid word: Too few letters")
+                this.shakeInput()
+                return false
+            }
+            validWord = await this.checkIfWord();
+            if (!validWord) {
+                this.showError("Invalid word: Not found in dictionary")
+                this.shakeInput()
+                return false
+            }
+            return true
+        }
+        
+        this.shakeInput = function() {
+            time = 650
+            $("#guess").effect("shake", {times: 3, distance:4}, time)
+            $('#guess').css('background-color', '#FF6347'); 
+            setTimeout(function() {
+                $('#guess').css('background-color', 'white');
+            }, time);
+        }
+        
+        
+        this.enterGuess = async function() {
+            this.guess = $('#guess').val()
+            validGuess = await this.checkValidGuess();
+            if (!validGuess) {
+                return
+            }
+            colors = this.getGuessColors()
+            this.grid.addRow(this.guess, colors)
+            if (this.grid.filledrows == this.grid.maxrows) {
+                $('#enter').off()
+                alert('Sorry, you have run out of guesses! The word was "' + this.word + '"')
+                this.updateCookies(7)
+                $('#correct_answer').html('Correct answer: ' + this.word.toUpperCase() + '</br>Your score: 7')
+                this.finishGame()
+            }
+            this.displayUsedLetters()
+            if (this.isAllGreen(colors)) {
+                $('#enter').off()
+                alert("Congratulations, you win! The word was " + this.word.toUpperCase())
+                this.updateCookies(this.grid.filledrows)
+                $('#correct_answer').html('Correct answer: ' + this.word.toUpperCase() + '</br>Your score: ' + this.grid.filledrows)
+                this.finishGame()
+            }
+            $('#guess').val('')
+            $("#guess").attr("placeholder", "");
+            $("#guess").focus()
+        }
+        
+        this.finishGame = function() {
+            $("#newgame").show()
+            $("#guess").hide();
+            $('#enter').hide()
+        }
+
+        this.showAvgScore = function() {
+            if (this.avg_score == null) {
+                return
+            }
+            str = "Your average score is: " + (Math.round(this.avg_score * 100) / 100) + "</br>"
+            str += "Number of games played: " + this.games_played
+            $("#avg_score").html(str)
+        }
+        
+        this.updateCookies = function(score) {
+            if (this.avg_score == null) {
+                this.avg_score = score
+            } else {
+                this.avg_score = ((this.avg_score*this.games_played) + score)/(this.games_played + 1)
+            }
+            this.games_played++
+            document.cookie = "avg_score=" + this.avg_score
+            document.cookie = "games_played=" + this.games_played
+        }
+            
+        this.readCookies = function() {
+            if (document.cookie == "") {
+                return
+            }
+            this.avg_score = parseFloat(document.cookie
+            .split('; ')
+            .find(row => row.startsWith('avg_score='))
+            .split('=')[1])
+            
+            this.games_played = parseInt(document.cookie
+            .split('; ')
+            .find(row => row.startsWith('games_played='))
+            .split('=')[1])
+        }
+            
+        this.setAnimations = function() {
+            // Mouse enter
+            $("#enter,#newgame").hover(function(){
+                $(this).animate({
+                    'background-color': '#e4e4e4',
+                    'color': 'black',
+                }, 100);
+            },
+            // Mouse leave
+            function() {
+                $(this).animate({
+                    'background-color': 'rgb(30, 30, 30, 1);',
+                    'color': '#e4e4e4',
+                }, 100);
+            })
+        }
+        
+        this.bindButtons = function() {
+            $('#enter').unbind('click').on('click', this.enterGuess.bind(this))
+            $('#newgame').unbind('click').on('click', this.newGame.bind(this))
+            $('#guess').unbind('keyup').keyup(function(e){
+                if(e.which == 13){ //Enter key
+                    $('#enter').click();
+                }
+            })
+        }
+    }
+</script>
+
+<body>
+    <div id="content">
+        <h1>WORDLE</h1>
+        <h2 id="correct_answer"></h2>
+        <div id="game">
+            <div class="letter_grid">
+    </div>
+    <div id="inputs">
+        <input type='text' name='guess'  id='guess' maxlength="5" placeholder="Enter a 5-letter word">
+        <input type="button" value = "Enter" id="enter">
+        <input type="button" value = "New Game" id="newgame">
+    </div>
+    <div id="error_msg"></div>
+    </div>
+    <div id="used_letters">
+    <h2>Used Letters</h2>
+    <div id="used_letters_box">
+    <div id="used_letters_grid">
+    </div>
+</div>
+<div id="avg_score"></div>
+</div>
+</div>
+</body>
+</html>

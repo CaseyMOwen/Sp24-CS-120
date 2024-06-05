@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<title>Meet the Band</title>
+<style type="text/css">
+h1{text-align: center;}
+h3{font-weight: 400; font-size: large; margin: 20px auto; max-width: 1200px; text-align: left;}
+.img_text{padding: 30px 0px; display: block;}
+/* .img_text .text{text-align: left;} */
+.img_text .image{background-position:  0 0; background-position: center;}
+.img_text .image#alex{background-image: url(images/alex.webp)}
+.img_text .image#sarah{background-image: url(images/Sarah.webp); object-fit: cover;}
+.img_text .image#emily{background-image: url(images/emily.webp)}
+.img_text .image#ryan{background-image: url(images/ryan.webp)}
+.img_text .image#lisa{background-image: url(images/lisa.webp)}
+#content{margin-bottom: 60px;}
+.text.last{display: none;}
+
+@media screen and (max-width: 1300px) { 
+    /* Replace Testimonials with shorter versions */
+    .img_text{padding: 5px 0px;}
+
+}
+@media screen and (max-width: 1300px) { 
+    /* Replace Testimonials with shorter versions */
+    .img_text{padding: 5px 0px;}
+    h3{margin: 30px;}
+
+}
+
+@media screen and (max-width: 825px) { 
+    .text.first{display: none;}
+    .text.last{display: inline-block;} 
+    .img_text{padding: 5px 0px;}
+    .img_text .text{width: 100%;}
+    #content{margin-top: 25px; margin-bottom: 75px;}
+}
+
+/* @media screen and (max-width: 700px) { 
+    #content{margin-top: 50px;}
+} */
+
+
+@media screen and (max-width: 450px) {
+    #content{padding: 0px 0px 0px 0px; margin-top: 150px; margin-bottom: 100px;}
+}
+
+
+</style>
+
+</head>
+
+<body>
+    <div class="header">
+		<div><a href="index.html">Home</a></div>
+		<div><a href="meet_the_band.html">Meet the Band</a></div>
+		<div><a href="events.html">Events</a></div>
+		<div id="contact"><a href="contact.html">Contact</a></div>
+        </div>
+    <div id="content">
+        <h1>
+            Meet the Band
+        </h1>
+        <h3>
+            Meet the Harmony behind Happily Every After: Introducing our exceptional team of musicians dedicated to elevating your wedding experience. Get to know the passion, talent, and commitment that drive every note, ensuring your special day is filled with unforgettable melodies and joyous celebration.
+        </h3>
+        <div class="img_text" >
+                <div class="image" id="alex"></div>
+                <div class="text">
+                <p>  Meet <Strong>Alex Thompson</Strong>, the soulful vocalist of Happily Ever After. With his captivating voice and heartfelt delivery, Alex brings warmth and emotion to every performance, making your special day truly unforgettable. With years of experience in the wedding music scene, Alex understands the importance of tailoring each song to reflect the love and personality of the couple. Whether it's a classic ballad or a modern hit, Alex's versatility shines through, creating magical moments that will be cherished for a lifetime.</p></div>
+
+        </div>
+        <div class="img_text" >
+            <div class="text first">
+            <p>  Introducing <Strong>Sarah Williams</Strong>, our dynamic guitarist at Happily Ever After. With a passion for music that's as infectious as her riffs, Sarah adds a unique flair to every performance. Drawing from a diverse range of influences, from classic rock to contemporary pop, Sarah's guitar solos will have you tapping your feet and swaying to the beat all night long. Her dedication to perfection and love for creating memorable experiences ensure that your wedding day is filled with nothing but the best music and unforgettable moments.</p></div>
+            <div class="image" id="sarah"></div>
+            <div class="text last">
+            <p>  Introducing <Strong>Sarah Williams</Strong>, our dynamic guitarist at Happily Ever After. With a passion for music that's as infectious as her riffs, Sarah adds a unique flair to every performance. Drawing from a diverse range of influences, from classic rock to contemporary pop, Sarah's guitar solos will have you tapping your feet and swaying to the beat all night long. Her dedication to perfection and love for creating memorable experiences ensure that your wedding day is filled with nothing but the best music and unforgettable moments.</p></div>
+        </div>
+        <div class="img_text" >
+            <div class="image" id="emily"></div>
+            <div class="text">
+            <p>  Introducing  <Strong>Emily Johnson</Strong>, the talented keyboardist of Happily Ever After. With her fingers dancing effortlessly across the keys, Emily brings elegance and charm to every performance. With a background in classical training and a love for all genres of music, Emily adds depth and richness to our sound, creating a truly enchanting atmosphere for your special day. Her attention to detail and passion for perfection ensure that every note is played with precision and heart.</p></div>
+        </div>
+        <div class="img_text" >
+            <div class="text first">
+            <p>  Meet <Strong>Ryan Thompson</Strong>, the charismatic drummer of Happily Ever After. With his infectious energy and impeccable timing, Ryan sets the rhythm that keeps the dance floor alive all night long. Drawing inspiration from a wide array of musical styles, Ryan's beats bring an undeniable groove to our performances, ensuring that every moment is filled with excitement and joy. His dedication to his craft and love for creating unforgettable experiences make him an invaluable member of our band.</p></div>
+            <div class="image" id="ryan"></div>
+            <div class="text last">
+            <p>  Meet <Strong>Ryan Thompson</Strong>, the charismatic drummer of Happily Ever After. With his infectious energy and impeccable timing, Ryan sets the rhythm that keeps the dance floor alive all night long. Drawing inspiration from a wide array of musical styles, Ryan's beats bring an undeniable groove to our performances, ensuring that every moment is filled with excitement and joy. His dedication to his craft and love for creating unforgettable experiences make him an invaluable member of our band.</p></div>
+        </div>
+        <div class="img_text" >
+            <div class="image" id="lisa"></div>
+            <div class="text">
+            <p>  Introducing  <Strong>Lisa Davis</Strong>, the versatile violinist of Happily Ever After. With her graceful bowing and emotive melodies, Lisa adds a touch of elegance and romance to every performance. Trained in both classical and contemporary styles, Lisa's violin solos beautifully complement every song, creating magical moments that will be cherished forever. Her passion for music and dedication to perfection ensure that your wedding day is filled with enchanting sounds and unforgettable memories.</p></div>
+        </div>
+    </div>
+    <div class="footer">
+        <div><a href="tel:1234567890">123-456-7890</a></div>
+        <div id="social_links">    
+            <a href='https://www.instagram.com' target="_blank"><img src='images/instagram.webp'></a>
+            <a href='https://www.twitter.com' target="_blank"><img src='images/twitter.png'></a>
+            <a href='https://www.facebook.com' target="_blank"><img src='images/facebook.png'></a>
+        </div>
+        <div><a href="mailto:email@example.com">email@example.com</a></div>
+        </div>
+</body>

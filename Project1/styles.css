@@ -1,0 +1,39 @@
+body{font-family: Palatino, URW Palladio L, serif; margin: 0; padding: 0;}
+#content{margin-top: 10px; padding-top: 37px;}
+h2{font-size: 30px; color: inherit;}
+
+/* Header */
+.header{top: 0; background-color: #fff; display: grid;grid-template-columns: auto auto auto auto; padding: 5px 20px; width: 100%;text-align: center; position: fixed; box-sizing: border-box; border-bottom: 1px solid #000;}
+.header > div {font-size: 20px; padding: 5px 40px; box-sizing:content-box;
+color: #000; text-align: center; border-radius: 5px;}
+.header > div a {text-decoration: none; color: inherit;}
+.header > div:hover {text-decoration: underline; text-shadow: 1px 0px 0px black;}	
+.header > div#contact{border: 1px solid #000; background-color: gold;}
+.header > div#contact:hover{border: 1px solid #fff; background-color: black; color: white;}
+@media screen and (max-width: 700px) {
+    /* Two column header */
+    .header{ grid-template-columns: auto auto;}   
+}
+
+/* Footer */
+.footer{bottom: 0; background-color: #333; text-align: center; position: fixed;  width: 100%; margin: 0; padding: 10px; display: grid; grid-template-columns: auto auto auto;}
+.footer > div {display: inline-block; font-size: 15px; padding: 5px 10px; box-sizing:border-box;
+    color: #fff; text-align: center;}
+.footer > div a {text-decoration: underline; color: inherit;}
+.footer > div#social_links a{display: inline-block; height: 5px;}
+.footer > div#social_links a img{height: 25px;}
+@media screen and (max-width: 450px) {
+    /* One column header and footer */
+    .header{ grid-template-columns: auto;}
+    .header > div {font-size: 17px;}
+    .footer{ grid-template-columns: auto;}
+}
+
+/* Class for when an image and text go side by side */
+.img_text {background-color: white; height: auto;  width: 100%; padding: 0px 0px 15px 0px; box-sizing:border-box; text-align:center; color: #020000; margin: 0;}
+.img_text h2{margin-bottom: 0;}
+.img_text div {display: inline-block;font-size: 20px; padding: 25px 50px;
+     color: #000; background-color: #fff; text-align: center;  width: 100%; max-width: 450px;vertical-align: bottom; box-sizing: border-box; margin-top: 0;}
+.img_text .image {height: 400px;background-size:cover; object-fit: cover;}
+.img_text .text {width: 30%; padding: 0px 20px; margin: 0; min-width: 350px; max-width: 450px; text-align: left;}
+

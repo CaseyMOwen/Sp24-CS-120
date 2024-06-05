@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<title>Happily Every After</title>
+<style type="text/css">
+    
+    .background{background-size:cover; height: 900px;  width: 100%; padding-top: 25px; box-sizing:border-box; text-align:center; font-size:  70px; color: #fff;}
+    .background#top {background-image: url(images/Party_Background.webp); padding: 300px 30px; background-position: 0px, 0px;}
+    .background#testimonials {background-image: url(images/Home-Background.webp); padding-top: 25px;background-size:cover; object-fit: cover; margin: auto auto}
+    .background#tracks {background-image: url(images/tracks.webp); padding-top: 25px;background-size:cover; object-fit: cover; margin: auto auto}
+    h2{font-size: 30px; color: inherit;}
+    h3{font-size: 20px; color: inherit; font-weight: normal;}
+    .tracks_heading{display: block; background-color: #000; color: #fff; border: 3px solid #fff; margin: 25px 50px; height: fit-content;}
+    .track_list{display: block; background-color:#000; color: #fff; border: 3px solid #fff; font-size: 25px; width:fit-content;margin: auto 5% auto auto; text-align: left; padding: 0px 20px;}
+    .text_boxes{text-align: center; width: 100%; top: 0; margin: 0; padding: 10px; box-sizing: border-box;}
+    .text_boxes div {font-size: 16px; padding: 20px;
+		border: 1px solid #000; color: #000; background-color: #fff; text-align: left; border-radius: 5px; width: 40%; vertical-align: middle; margin: 80px 0px;}
+    .short_text{display: none;}
+    .long_text{display: inline-block;}
+    .background h2 {margin: 0; top: 0;}
+    .img_text .image {background-image: url(images/band_photo.webp)}
+
+
+    @media screen and (max-width: 900px) { 
+        /* Replace Testimonials with shorter versions */
+        .tracks_heading{width: 80%; box-sizing: border-box;}
+        .track_list{margin: 0 50px; font-size: 20px; width: 80%; box-sizing: border-box;}
+    }
+
+    @media screen and (max-width: 700px) { 
+        /* Replace Testimonials with shorter versions */
+        .long_text{display: none;}
+        .short_text{display: inline-block;}
+        .tracks_heading,.track_list{margin: 25px auto;}
+        
+    }
+    
+</style>
+
+</head>
+
+<body>
+    <div class="header">
+		<div><a href="index.html">Home</a></div>
+		<div><a href="meet_the_band.html">Meet the Band</a></div>
+		<div><a href="events.html">Events</a></div>
+		<div id="contact"><a href="contact.html">Contact</a></div>
+        </div>
+    <div id="content">
+        <div class='background' id='top'>
+            Happily Ever After
+            <h2>
+                We set your love to music.
+            </h2>
+        </div>
+        <div class="img_text">
+            <h2>Who We Are</h2>
+
+                <div class="image"></div>
+                <div class="text">
+                <p> <Strong>Happily Every After</Strong> is more than just a wedding cover band – we're storytellers, weaving melodies that encapsulate the essence of love and celebration. From intimate ceremonies to lively receptions, our talented musicians transform moments into memories, creating harmonious atmospheres where love truly shines. With every chord and lyric, we strive to make your special day a symphony of joy and romance, ensuring that your happily ever after begins with a melody to cherish forever.</p></div>
+
+        </div>
+        <div class='background' id='tracks'>
+            <div class="tracks_heading">    
+            <h2>What We Play</h2>
+            <h3>These are some of our top tracks! This is just a sample of our repertoire: we play a wide variety of music and can definitely accomodate your tastes. We are more than happy to prepare specific songs by request!</h3>
+            </div>
+            <div class="track_list">
+            <ol>
+                <li>"I Will Always Love You" by Whitney Houston</li>
+                <li>"Can't Help Falling in Love" by Elvis Presley</li>
+                <li>"Marry Me" by Train</li>
+                <li>At Last" by Etta James</li>
+                <li>"A Thousand Years" by Christina Perri</li>
+                <li>"Signed, Sealed, Delivered (I'm Yours)" by Stevie Wonder</li>
+                <li>"Thinking Out Loud" by Ed Sheeran</li>
+                <li>"I Don't Want to Miss a Thing" by Aerosmith</li>
+                <li>"All of Me" by John Legend</li>
+                <li>"Celebration" by Kool & The Gang</li>
+
+            </ol>
+            </div>
+
+
+
+        </div>
+        <div class='background' id='testimonials'>
+            <h2>What They're Saying</h2>
+            <div class="text_boxes">
+                <div class="long_text">"Booking Happily Every After for our wedding was one of the best decisions we made! From the moment we reached out to them, their professionalism and passion for music shone through. They took the time to understand our vision and preferences, and on the big day, they absolutely delivered. Their performance was flawless, and they had everyone on the dance floor from start to finish. The way they personalized our song choices made our wedding feel truly special and unique. We received countless compliments from our guests about how amazing the band was. Thanks to Happily Every After, our wedding day was everything we dreamed of and more. We couldn't recommend them highly enough!"</div>
+                <div class="long_text">"Happily Every After exceeded all our expectations! Their music was the highlight of our wedding, keeping everyone dancing and smiling throughout the night. They're not just talented musicians but also wonderful people to work with. Highly recommended for anyone looking to elevate their big day!"</div>
+                <div class="short_text">"Thanks to Happily Every After, our wedding day was everything we dreamed of and more. We couldn't recommend them highly enough!"</div>
+                <div class="short_text">They're not just talented musicians but also wonderful people to work with."</div>
+                </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div><a href="tel:1234567890">123-456-7890</a></div>
+        <div id="social_links">    
+            <a href='https://www.instagram.com' target="_blank"><img src='images/instagram.webp'></a>
+            <a href='https://www.twitter.com' target="_blank"><img src='images/twitter.png'></a>
+            <a href='https://www.facebook.com' target="_blank"><img src='images/facebook.png'></a>
+        </div>
+        <div><a href="mailto:email@example.com">email@example.com</a></div>
+        </div>
+</body>
