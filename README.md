@@ -15,22 +15,22 @@ As part of this graduate-level class I learned valuable skills useful in web pro
 The projects listed below, with the source code in the repository, represent the most significant assignments completed during the semester. The projects chronicle my abilities increasing over time as the projects get increasingly complex. 
 
 ## Project 1
-https://caseymowen.github.io/Sp24-CS-120/Project1/
+https://caseyowen.com/cs120/Project1/
 ### Assignment
 Independently create a small website for a cover band. Must have at least 4 pages, and contain realistic content.
 
 ## Project 2
-https://caseymowen.github.io/Sp24-CS-120/Project2/
+https://caseyowen.com/cs120/Project2/
 ### Assignment
 Independently create the game of Wordle, using interactive HTML/CSS/JavaScript elements. Core structure of code uses OOP in JavaScript.
 
 ## Project 3
-https://caseymowen.github.io/Sp24-CS-120/Project3/products.php
+https://caseyowen.com/cs120/Project3/products.php
 ### Assignment
 Independently create an interactive e-commerce website, using interactive HTML/CSS/JavaScript, with MySQL database and PHP.
 
 ## Final Project
-https://caseymowen.github.io/Sp24-CS-120/FinalProject/swaparoo/
+https://caseyowen.com/cs120/FinalProject/swaparoo/
 ### Assignment
 In a group of 3 students, create a useful web app that performs a useful task that uses all previous elements learned in class - HTML, CSS, JavaScript, PHP, MySQL, and an API call.
 
